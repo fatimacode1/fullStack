@@ -204,7 +204,7 @@ class ShoppingCart {
 
 //Booleans and Dynamic Typing 
 {
-    //Basic Boolean Usega
+    //Basic Boolean Usage
     let isLoggedin = true;
     let isOver18 = false;
     let hasPermission = true;
@@ -524,3 +524,394 @@ console.log(city[9]); //undefined
 }
 
 //First and Last Characters
+{
+    let word = "JavsScript";
+
+    //First character
+    let first = word[0];
+    console.log(first); //J
+    
+    //Last character using length
+    let last = word[word.length - 1];
+    console.log(last); //t
+
+    //Why lenth - l?
+    //Because length is 10, but last index is 9 (0-based indexing)
+    console.log(word.length); //10
+    console.log(word[9]); //t
+    console.log(word[10]); //undefined (out of bounds)
+      
+}
+
+//Out of Bounds Access
+//Accessing an index that doesn't exist returns undefined
+
+{
+    let name = "Alice"; //length is 5, valid indices is 0-4
+
+    console.log(name[0]); //A
+    console.log(name[4]); //e
+    console.log(name[5]); //undefined
+    console.log(name[10]); //undefined
+     console.log(name[-1]); //undefined (negative indices don't work like Python) 
+}
+
+//Practical Examples
+
+//Example 1: Checking First Character
+{
+    let email = "alice@example.com";
+
+    if (email[0] === '@') {
+        console.log("Email cannot start with @");    
+    } else {
+        console.log("Email format might be valid");
+        
+    }
+}
+
+//Example 2: Getting Initials
+{
+    let firstName = "Alice";
+    let lastName = "Smith";
+
+    let initials = firstName[0] + lastName[0];
+        console.log(initials); //AS
+        
+    //With dots
+    let formalInitials = firstName[0] + "." + lastName[0] + ".";
+    console.log(formalInitials); //A.S.
+    
+}
+
+//Character Validation
+{
+    let passowrd = "Pass1234";
+
+    let firstChar = passowrd[0];
+    let lastChar = passowrd[passowrd.length - 1];
+
+    console.log("First character:", firstChar); //P
+    console.log("Last character:". lastChar); //4
+
+    if (lastChar >= '0' && lastChar <= '9') {
+        console.log("Password ends with a number");
+        
+    }
+    
+}
+
+//Important Notes
+
+//1. Strings are Immutable: You cannot change individual characters
+{
+   let word = "Hello";
+   word[0] = "J"; //This does NOT work!
+   console.log(word); //Still "Hello"
+   
+   //To change a string, create a new one
+   let newWord = "J" + word.slice(1);
+   console.log(newWord); //Jello  
+}
+
+//2.Length vs Last Index
+{
+    let text = "Hello";
+    console.log(text.length); //5
+    console.log(text[text.length]); //undefined
+    console.log(text[text.length - 1]); //o   
+}
+
+//3. Space Count Too
+{
+    let text = "Hello World";
+    console.log(text.length); //11 (space counts)
+    console.log(text[5]); //"" (space character)  
+}
+
+//String Concatenation 
+//Means joining strings together
+
+{
+    //Joining two strings
+
+    let firstName = "Alice";
+    let lastName = "Smith";
+    let fullName = firstName + lastName;
+    console.log(fullName); //AliceSmith
+
+    //Adding space
+    let fullNameWithSpace = firstName + " " + lastName;
+    console.log(fullNameWithSpace); //Alice Smith
+
+    //Multiple Concatenation 
+    let greeting = "Hello";
+    let name = "World";
+    let punctuation = "!";
+
+    let message = greeting + ", " + name + punctuation;
+    console.log(message); //Hello, World!
+
+}
+
+//Concatenating Numbers and Strings
+//When you use + with a string and a number, JS converts the number to a string
+{
+    //Number + String = String
+    let score = 100;
+    let message1 = "Your score is: " + score;
+    console.log(message1); //Your score is: 100
+    console.log(typeof message1); //string
+
+    //String + Number = String
+    let message2 = "Player " + 1;
+    console.log(message2); //Player 1
+
+    //Multiple numbers and strings
+    let age = 25;
+    let message3 = "I am " + age + " years old";
+    console.log(message3); //I am 25 years old
+}
+
+//Concatenation Examples
+
+//Example 1: Building Messages
+{
+    let userName = "Bob";
+    let points = 150;
+
+    let welcomeMsg = "Welcome back, " + userName + "!";
+    let scoreMsg = "You have " + points + " points";
+
+    console.log(welcomeMsg); // Welcome back, Bob!
+    console.log(scoreMsg); // You have 150 points   
+}
+
+//Example 2: Creating URLs
+{
+    let domain = "example.com";
+    let protocol = "https://"; 
+    let page = "/about";
+
+    let fullURL = protocol + domain + page;
+    console.log(fullURL); //https://example.com/about
+}
+
+//Example 3: Building File Names
+{
+    let fileName = "report";
+    let fileType = ".pdf";
+    let year = 2026;
+
+    let fullFileName = fileName + "_" + year + fileType;
+    console.log(fullFileName); //report_2026.pdf
+}
+
+//The += Operator for Concatenation
+{
+    let message = "Hello";
+    message += " ";
+    message += "World";
+    message += "!";
+    
+    console.log(message);
+    
+}
+
+//IMP: Number Addition vs String Concatenation
+
+//All numbers - addition
+console.log(10 + 20); //30 (number addition)
+
+//String first - concatenation
+console.log("10" + 20); //1020 (string concatenation)
+
+//Number first, then string - concatenation
+console.log(10 + "20"); //1020 (string concatenation)
+
+//Mixed operation 
+console.log(10 + 20 + "30"); //3030
+console.log("10" + 20 + 30); //102030 (all concatenation)
+
+//Using parentheses
+console.log("Result: " + (10 + 20)); //Result: 30 (foces addition first)
+
+//Rule: If any operand in a + operation is a string, JavaScript performs concatenation (converts everything to strings)
+
+//Concatenation vs Template Literals
+{
+    //Concatenation
+
+    let name = "Alice";
+    let age = 25;
+    let city = "New York";
+    let message = "My name is " + name + ", I am " + age + "years old, and I live in " + city + ".";
+    console.log(message);
+    
+
+
+//Template Literal
+let betterMessage = `My name is ${name}, I am ${age} years old, and I live in ${city}.`;
+console.log(betterMessage);
+
+}
+
+//Null vs Undefined
+
+//1. Variable declared but not initialized
+{
+    let score;
+    console.log(score); //undefined
+    console.log(typeof score); //undefined
+    
+}
+
+//2. Function with no return value
+{
+    function greet() {
+        console.log("Hello!");
+        //No return statement
+    }
+
+    let result = greet();
+    console.log(result); //undefined
+    
+}
+
+//3. Accessing non-existent object property
+{
+    let user = {name: "Alice"};
+    console.log(user.age); //undefined (property doesn't exist)
+    
+}
+
+//4. Array element that doesn't exist
+
+{
+    let colors = ["Red", "Blue"];
+    console.log(colors[5]); //undefined
+    
+}
+
+//5. Function parameter not provided
+
+{
+    function greet(name) {
+        console.log(name);
+        
+    }
+    greet(); //undefined (no argument passed)
+}
+
+//Example Usage 
+{
+    let userInput; //declared but not assigned
+
+    if (userInput === undefined) {
+        console.log("Please provide input");
+        
+    } else {
+        console.log("Input received:", userInput);
+        
+    }
+}
+
+//Null
+//Intentional absence of a value
+
+//1. Intentionally setting something as empty
+{
+    let currentUser = null //No used logged in
+    console.log(currentUser); //null
+    console.log(typeof currentUser); //object  
+}
+
+//2. Resetting a value
+{
+    let winner = "Alice";
+    console.log(winner); //Alice
+
+    //Game resets
+    winner = null;
+    console.log(winner); //null (intentionally cleared)
+    
+    
+}
+
+//3. API responses
+{
+    let userData = {
+        name: "Bob",
+        email: "bob@example.com",
+        phone: null //User hasn't provided phone number
+    };
+}
+
+//Null or Undefined
+//Example 1: User Login State
+
+{
+    let loggedInUser = null;
+    
+    function login(username) {
+        loggedInUser = username;
+    }
+
+    function logout() {
+        loggedInUser = null;
+    }
+
+    login("Alice");
+    console.log(loggedInUser); //Alice
+
+    logout();
+    console.log(loggedInUser); //null
+    
+    
+}
+
+//Example 2: Optional Form Fields
+{
+    let formData = {
+        firstName: "John",
+        lastName: "Doe",  
+        middleName: null,
+        nickname: undefined
+      }
+}
+
+//Example 3: Database Records
+{
+    let product ={
+        id: 101,
+        name: "Laptop",
+        discount: null,
+        rating: undefined
+    };
+}
+
+//Other Console Methods
+//[WEIC]
+
+//Warning message 
+console.warn("This is a warning!");
+
+//Error message 
+console.error("This is an error!");
+
+//Info message
+console.info("This is information");
+
+//Clear the console
+// console.clear();
+
+//Template Literals
+
+//Conditional Logic
+
+{
+    let temperature = 30;
+    let weather = `It's ${temperature > 25 ? "hot" : "cold"} today!`;
+    console.log(weather);
+    
+}
